@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:App2.Models"
+             xmlns:local="clr-namespace:App2.ViewModels"
+             x:Class="App2.Views.CategoryPage"
+             BackgroundColor="White"
+             Title="Book Categories">
+    
+    <ContentPage.Content>
+
+        <RefreshView x:DataType="local:CategoryViewModel" Command="{Binding LoadCatCommand}" IsRefreshing="{Binding IsBusy}">
+
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ListView x:Name="CategoryList" ItemsSource="{Binding Categorylist}" HasUnevenRows="True" ItemTapped="CategoryList_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CategoryModel">
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Padding="20,10">
+                                        <Frame HasShadow="True" BackgroundColor="White" CornerRadius="20" >
+                                            <Label Text="{Binding CategoryName}" FontAttributes="Bold" TextColor="#4A4B4D"></Label>
+                                        </Frame>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+        </RefreshView>
+       
+    </ContentPage.Content>
+</ContentPage>

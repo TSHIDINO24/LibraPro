@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registration</title>
+  <link href="login.css" rel="stylesheet">
+  <style>
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="register-section">
+    <div class="form-details">
+      <h1>User Registration</h1>
+      <form id="registrationForm">
+        <div class="message-container">
+          <p id="message"></p>
+        </div>
+        <div class="inputbox">
+          <label for="userName">Name:</label>
+          <input type="text" id="userName" name="userName" required><br><br>
+        </div>
+        <div class="inputbox">
+          <label for="userSurname">Surname:</label>
+          <input type="text" id="userSurname" name="userSurname" required><br><br>
+        </div>
+        <div class="inputbox">
+          <label for="userIDNumber">ID Number:</label>
+          <input type="text" id="userIDNumber" name="userIDNumber" required><br><br>
+        </div>
+        <div class="inputbox">
+          <label for="userEmail">Email:</label>
+          <input type="email" id="userEmail" name="userEmail" required><br><br>
+        </div>
+        <div class="inputbox">
+          <label for="userAddress">Address:</label>
+          <input type="text" id="userAddress" name="userAddress" required><br><br>
+        </div>
+        <div class="inputbox">
+          <label for="userPhone">Phone:</label>
+          <input type="tel" id="userPhone" name="userPhone" required><br><br>
+        </div>
+        <div class="inputbox">
+          <label for="userPassword">Password:</label>
+          <input type="password" id="userPassword" name="userPassword" required><br><br>
+        </div>
+        <div class="inputbox">
+          <label for="userPassword">Confirm Password:</label>
+          <input type="password" id="confPassword" name="usercfPassword" required><br><br>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+      <div class="popup" id="popup">
+        <p id="popupMessage"></p>
+        <button id="closeButton">Close</button>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script>
+        function showPopup(message) {
+          const popup = document.getElementById('popup');
+          const popupMessage = document.getElementById('popupMessage');
+          popupMessage.textContent = message;
+          popup.style.display = 'block';
+
+          // Close the popup when the close button is clicked
+          document.getElementById('closeButton').addEventListener('click', function () {
+            popup.style.display = 'none';
+          });
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          const registerUrl = 'https://greatsparklyrock35.conveyor.cloud/api/User/userregister';
+          const userName = document.getElementById('userName').value;
+          const userSurname = document.getElementById('userSurname').value;
+          const userIDNumber = document.getElementById('userIDNumber').value;
+          const userEmail = document.getElementById('userEmail').value;
+          const userAddress = document.getElementById('userAddress').value;
+          const userPhone = document.getElementById('userPhone').value;
+          const userPassword = document.getElementById('userPassword').value;
+          const validid = isValidID(userIDNumber);
+          if(validid==false){
+            showPopup("ID is Incorrect!")
+          }else{
+            
+          const data = {
+            userName: userName,
+            userSurname: userSurname,
+            userIDNumber: userIDNumber,
+            userEmail: userEmail,
+            userAddress: userAddress,
+            userPhone: userPhone,
+            userPassword: userPassword
+          };
+
+          axios.post(registerUrl, data)
+            .then(response => {
+              showPopup('Registration successful');
+
+              window.location.href = "Login.html";
+            })
+            .catch(error => {
+              showPopup('registration unsuccessful');
+              console.error('Registration error:', error);
+
+            });
+          }
+        });
+
+        function isValidID(IDNumber) {
+          // Check if the ID Number is in the correct format
+          if (!/^\d{13}$/.test(IDNumber)) {
+            return false;
+          }
+
+          // Extract the date of birth from the ID number provided
+          const YearOfBirth = IDNumber.substring(0, 2);
+          const MonthOfBirth = IDNumber.substring(2, 4);
+          const DayOfBirth = IDNumber.substring(4, 6);
+
+          const Year = parseInt(YearOfBirth);
+          const Month = parseInt(MonthOfBirth);
+          const Day = parseInt(DayOfBirth);
+
+          // Check if the date of birth is valid
+          if (Year < 0 || Year > 99 || Month < 1 || Month > 12 || Day < 1 || Day > 31) {
+            return false;
+          }
+
+          // Extract the last digit (checksum digit)
+          const ChecksumDigit = parseInt(IDNumber.substring(12, 13));
+
+          // Calculate the Luhn checksum
+          const idDigits = IDNumber.substring(0, 12).split('').map(t => parseInt(t));
+
+          let sum = 0;
+          let doubleDigit = true;
+
+          for (let i = idDigits.length - 1; i >= 0; i--) {
+            let digit = idDigits[i];
+
+            if (doubleDigit) {
+              digit *= 2;
+              if (digit > 9) {
+                digit -= 9;
+              }
+            }
+
+            sum += digit;
+            doubleDigit = !doubleDigit;
+          }
+
+          const CalcCheckSum = (10 - (sum % 10)) % 10;
+
+          return CalcCheckSum === ChecksumDigit;
+        }
+
+        // Test cases
+       
+
+      </script>
+</body>
+
+</html>

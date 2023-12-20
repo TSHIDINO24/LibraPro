@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "dgSpecHash": "HkWZvIsMtFzZ1+h+I/TdzUFZA5ITIfaaTr71I9V2VCA6yBz854PZ0aATKbpcsuoe5l5b2BZ2x3f0AEXgAE4VZw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Tshidilo\\Desktop\\DebugCoders\\team11-mobile\\App2\\App2\\App2.iOS\\App2.iOS.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0-preview.6.23329.7\\microsoft.bcl.asyncinterfaces.8.0.0-preview.6.23329.7.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\microsoft.toolkit.mvvm\\7.1.2\\microsoft.toolkit.mvvm.7.1.2.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\plugin.firebasepushnotification\\3.4.35\\plugin.firebasepushnotification.3.4.35.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\prism.core\\8.1.97\\prism.core.8.1.97.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\refractored.mvvmhelpers\\1.6.2\\refractored.mvvmhelpers.1.6.2.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\system.net.http.json\\8.0.0-preview.6.23329.7\\system.net.http.json.8.0.0-preview.6.23329.7.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\system.text.encodings.web\\8.0.0-preview.6.23329.7\\system.text.encodings.web.8.0.0-preview.6.23329.7.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\system.text.json\\8.0.0-preview.6.23329.7\\system.text.json.8.0.0-preview.6.23329.7.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\xam.plugins.settings\\5.0.0-beta\\xam.plugins.settings.5.0.0-beta.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\xamarin.build.download\\0.10.0\\xamarin.build.download.0.10.0.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\xamarin.firebase.ios.cloudmessaging\\4.3.0\\xamarin.firebase.ios.cloudmessaging.4.3.0.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\xamarin.firebase.ios.core\\6.6.6\\xamarin.firebase.ios.core.6.6.6.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\xamarin.firebase.ios.installations\\1.1.1\\xamarin.firebase.ios.installations.1.1.1.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\xamarin.firebase.ios.instanceid\\4.3.3\\xamarin.firebase.ios.instanceid.4.3.3.nupkg.sha512",
+    "C:\\Users\\Tshidilo\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
+  ],
+  "logs": []
+}

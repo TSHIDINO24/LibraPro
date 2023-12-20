@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Views.RegisterPage"
+             BackgroundColor="white"
+             xmlns:viewmodels="clr-namespace:App2.ViewModels"  
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewmodels:RegisterViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <StackLayout>
+                <Label Text="Sign Up" FontSize="30" HorizontalTextAlignment="Center" FontFamily="Metropolis" Margin="0,10,0,0" TextColor="#4A4B4D"/>
+                <Label Text="Enter your details to create an account" Margin="0,5,0,0" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontSize="15" FontFamily="Metropolis" TextColor="#4A4B4D"/>
+
+                <Frame CornerRadius="30" BackgroundColor="white" BorderColor="#4a4b4d" HasShadow="False" WidthRequest="350" HeightRequest="50" Margin="20,20,30,-5">
+
+                    <Entry x:Name="txtfirstname" HorizontalTextAlignment="Start" TextColor="black" FontSize="Medium" PlaceholderColor="Black" Placeholder="First Name" Margin="0,-30,0,-30"/>
+                </Frame>
+
+                <Frame CornerRadius="30" BackgroundColor="white" BorderColor="#4A4B4D" HasShadow="False" WidthRequest="350" HeightRequest="50" Margin="20,10,30,-5">
+
+                    <Entry x:Name="txtlastname" HorizontalTextAlignment="Start" TextColor="Black" FontSize="Medium" PlaceholderColor="black" Placeholder="Last Name" Margin="0,-30,0,-30"/>
+                </Frame>
+
+                <Frame CornerRadius="30" BackgroundColor="WHITE" BorderColor="#4A4B4D" HasShadow="False" WidthRequest="350" HeightRequest="50" Margin="20,10,30,-5">
+
+                    <Entry x:Name="txtidnumber" HorizontalTextAlignment="Start" TextColor="BLACK" FontSize="Medium" PlaceholderColor="BLACK" Placeholder="ID number" Margin="0,-30,0,-30"/>
+                </Frame>
+
+                <Frame CornerRadius="30" BackgroundColor="WHITE" BorderColor="#4A4B4D" HasShadow="False" WidthRequest="350" HeightRequest="50" Margin="20,10,30,-5">
+
+                    <Entry x:Name="txtemail" HorizontalTextAlignment="Start" TextColor="Black" FontSize="Medium" PlaceholderColor="Black" Placeholder="Email" Margin="0,-30,0,-30"/>
+                </Frame>
+
+                <Frame CornerRadius="30" BackgroundColor="White" BorderColor="#4A4B4D" HasShadow="False" WidthRequest="350" HeightRequest="50" Margin="20,10,30,-5">
+
+                    <Entry x:Name="txtaddress" HorizontalTextAlignment="Start" TextColor="Black" FontSize="Medium" PlaceholderColor="Black" Placeholder="Address" Margin="0,-30,0,-30"/>
+                </Frame>
+
+                <Frame CornerRadius="30" BackgroundColor="White" BorderColor="#4A4B4D" HasShadow="False" WidthRequest="350" HeightRequest="50" Margin="20,10,30,-5">
+
+                    <Entry x:Name="txtphone" HorizontalTextAlignment="Start" TextColor="Black" FontSize="Medium" PlaceholderColor="Black" Placeholder="Phone Number" Margin="0,-30,0,-30"/>
+                </Frame>
+
+                <Frame CornerRadius="30" BackgroundColor="WHITE" BorderColor="#4A4B4D" HasShadow="False" WidthRequest="350" HeightRequest="50" Margin="20,10,30,-5">
+
+                    <Entry x:Name="txtpass" HorizontalTextAlignment="Start" TextColor="Black" IsPassword="True" FontSize="Medium" PlaceholderColor="Black" Placeholder="Password" Margin="0,-30,0,-30"/>
+                </Frame>
+
+
+                <Frame CornerRadius="30" BackgroundColor="White" BorderColor="#4A4B4D" HasShadow="False" WidthRequest="350" HeightRequest="50" Margin="20,10,30,-5">
+
+                    <Entry x:Name="txtconpass" HorizontalTextAlignment="Start" TextColor="Black" IsPassword="True" FontSize="Medium" PlaceholderColor="Black" Placeholder="Confirm Password" Margin="0,-30,0,-30"/>
+                </Frame>
+
+                <Button Text="Sign Up" Clicked="Button_Clicked"  BackgroundColor="#FC6011" WidthRequest="350" HeightRequest="47" HorizontalOptions="Center" CornerRadius="30" Margin="0,20,0,40"/>
+
+                <Label HorizontalOptions="Center" Margin="0,-10,0,60">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Already have an account? " TextColor="#4A4B4D"/>
+                            <Span Text="Sign In" TextColor="#FC6011" FontAttributes="Bold" TextDecorations="Underline"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

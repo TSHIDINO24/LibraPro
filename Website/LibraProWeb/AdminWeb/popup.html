@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popupForm {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      width: 300px;
+    }
+
+    .closePopup {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 14px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .closePopup:hover {
+      color: #555;
+    }
+
+    .form-input {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 150px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .btn-submit {
+      background-color: #fc8010;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn-submit:hover {
+      background-color: #333;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Your existing content -->
+
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popupForm">
+      <button class="closePopup" id="closePopup">x</button>
+      <h2>Add New Book</h2>
+      <form>
+        <div class="form-input">
+          <label for="title">Title:</label>
+          <input type="text" id="title" required>
+        </div>
+        <div class="form-input">
+          <label for="author">Author:</label>
+          <input type="text" id="author" required>
+        </div>
+        <div class="form-input">
+          <label for="description">Description:</label>
+          <input type="text" id="description" required>
+        </div>
+        <div class="form-input">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" required>
+        </div>
+        <div class="form-input">
+          <label for="image">Image URL:</label>
+          <input type="text" id="image" required>
+        </div>
+        <div class="form-input">
+          <label for="isbn">ISBN:</label>
+          <input type="text" id="isbn" required>
+        </div>
+        <div class="form-input">
+          <label for="category">Category:</label>
+          <input type="number" id="category" required>
+        </div>
+        <div>
+          <button type="submit" class="btn-submit" id="addBookBtn">Add Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <button id="showPopup">Add New Book</button>
+
+  <script>
+    const showPopupButton = document.getElementById('showPopup');
+    const closePopupButton = document.getElementById('closePopup');
+    const popupOverlay = document.getElementById('popupOverlay');
+
+    showPopupButton.addEventListener('click', () => {
+      popupOverlay.style.display = 'flex';
+    });
+
+    closePopupButton.addEventListener('click', () => {
+      popupOverlay.style.display = 'none';
+    });
+
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) {
+        popupOverlay.style.display = 'none';
+      }
+    });
+
+    popupOverlay.querySelector('.popupForm').addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    popupOverlay.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Form submitted!'); // For demonstration purposes
+      popupOverlay.style.display = 'none';
+    });
+  </script>
+
+</body>
+
+</html>

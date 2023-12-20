@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Views.AboutPage"
+              BackgroundColor="white"
+             xmlns:vm="clr-namespace:App2.ViewModels"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        
+            <StackLayout Grid.Row="1" Orientation="Vertical" Padding="30,100,30,24" Spacing="20">
+                <Label TextColor="#4a4b4d"  Text="About Diesploot Library" HorizontalOptions="Center" FontSize="Title"/>
+            <Label TextColor="#4A4B4D" FontSize="15" Text="Welcoe to Diesploot Library, your community's hub for knowledge, learning, and exploration. Our library has been serving the township of Soweto since 2005 and we are committed to proving exceptional services and resources to our patrons."  Padding="0,0,0,0"/>
+               
+                
+            </StackLayout>
+
+        <StackLayout Grid.Row="2" Orientation="Vertical"   Padding="30,-30,30,24" Spacing="20">
+            <Label Text="Our Mission" TextColor="#4a4b4d" HorizontalOptions="Center" FontSize="Title" />
+            <Label TextColor="#4A4B4D" FontSize="15" Text="At Diesploot Library,  our mission is to employer individuals, enrich our community. And foster a lifelong love of learning. We strive to achieve this by offering a diverse range of book resources that cater to the unique needs and interest of our patrons. "/>
+        </StackLayout>
+       
+    </Grid>
+
+</ContentPage>

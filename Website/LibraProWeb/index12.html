@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Catalog</title>
+    <link rel="stylesheet" href="js/style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+       /* Apply a basic layout and styling to the featured books container */
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+          <div class="header-left">
+            <h1>LibraPro</h1>
+            <nav>
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index1.html">Books</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </nav>
+            <div class="cart-container">
+              <div class="cart-icon" id="cartIcon">
+                <a href="cart.html" id="cartLink"><box-icon name='cart'></box-icon></a>
+                <div id="cart-icon" id="cartCount">0</div>
+    
+              </div>
+          </div>
+            <div class="header-right">
+              <a href="index.html" id="logout" class="btn sign-in"><span><i class="fas fa-sign-in-alt"></i></span>Sign out</a>
+            </div>
+          </div>
+          
+        </div>
+      </header>
+    
+    <div class="search-container">
+        <input type="text" id="searchInput" onkeyup="filterProductsByTitle()" placeholder="Search by book title">
+        <select id="categorySelect">
+            <option value="1">All</option>
+            <option value="5">Mathematics</option>
+            <option value="7">Engineering</option>
+            <option value="9">Accounting</option>
+        </select>
+    </div>
+    <div class="grid-container" id="bookGrid">
+        <!-- Book items will be dynamically added here -->
+    </div>
+    
+    
+    <footer>
+      <div class="contact-info">
+          <h3>CONTACT INFORMATION</h3>
+          <p>Email: <a href="LibraPro@gmail.com">LibraPro@gmail.com</a></p>
+          <p>Phone: (+27) 68 741 9876</p>
+      </div>
+      <div class="social-media">
+          <h3>SOCIAL MEDIA</h3>
+          <ul>
+              <li><a href="https://www.facebook.com/" target="_blank"><box-icon type='logo' name='facebook'></box-icon></a></li>
+              <li><a href="https://www.twitter.com/" target="_blank"><box-icon type='logo' name='twitter'></box-icon></a></li>
+              <li><a href="https://www.instagram.com/" target="_blank"><box-icon type='logo' name='instagram'></box-icon></a></li>
+          </ul>
+      </div>
+  </footer>    
+    <script src="https://unpkg.com/boxicons@2.1.3/dist/boxicons.js"></script>
+    <script src="css/script.js"></script>
+</body>
+</html>

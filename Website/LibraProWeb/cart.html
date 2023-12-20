@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Book Bag</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+
+    .message-container {
+      border: 2px solid orange;
+      padding: 20px;
+      background-color: #ccc;
+      text-align: center;
+    }
+
+    #message {
+      font-size: 14px;
+      color: #333;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <div class="header-left">
+        <h1>LibraPro</h1>
+        <nav>
+          <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="index1.html">Books</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-right">
+          <a href="index.html" class="btn sign-in"><span><box-icon name='log-out'></box-icon></span></a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <h1>Book Bag</h1>
+  <div class="cart-items">
+    <table>
+      <thead>
+        <tr>
+          <th>Book Title</th>
+          <th>Book Author</th>
+          <th>Image</th>
+          <th>Select</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="cart-items">
+        <!-- Cart items will be dynamically populated here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="buttons">
+    <button id="confirm">Borrow</button>
+  </div>
+  <div class="popup" id="popup">
+    <p id="popupMessage"></p>
+    <button id="closeButton">Close</button>
+  </div>
+  <div class="message-container">
+    <p id="message"></p>
+  </div>
+  <button id="redirectButton" href="borrow.html" style="display: none;
+    width:100%;
+    color:#333 ;"></button>
+
+  <footer>
+    <div class="contact-info">
+      <h3>CONTACT INFORMATION</h3>
+      <p>Email: <a href="LibraPro@gmail.com">LibraPro@gmail.com</a></p>
+      <p>Phone: (+27) 68 741 9876</p>
+    </div>
+    <div class="social-media">
+      <h3>SOCIAL MEDIA</h3>
+      <ul>
+        <li><a href="https://www.facebook.com/" target="_blank"><box-icon type='logo' name='facebook'></box-icon></a>
+        </li>
+        <li><a href="https://www.twitter.com/" target="_blank"><box-icon type='logo' name='twitter'></box-icon></a></li>
+        <li><a href="https://www.instagram.com/" target="_blank"><box-icon type='logo' name='instagram'></box-icon></a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+  <script src="https://unpkg.com/boxicons@2.1.3/dist/boxicons.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+
+    //const messageElement = document.getElementById('message');
+    function showPopup(message) {
+      const popup = document.getElementById('popup');
+      const popupMessage = document.getElementById('popupMessage');
+      popupMessage.textContent = message;
+      popup.style.display = 'block';
+
+      // Close the popup when the close button is clicked
+      document.getElementById('closeButton').addEventListener('click', function () {
+        popup.style.display = 'none';
+      });
+    }
+
+
+    function getCookie(name) {
+      const value = "; " + document.cookie;
+      const parts = value.split("; " + name + "=");
+      if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+
+    const authToken = getCookie("sessionToken");
+
+    if (authToken) {
+      console.log("Token retrieved:", authToken);
+    } else {
+      console.log("No token found.");
+    }
+
+    // getting elemts by ID
+    const bookTableBody = document.getElementById('cart-items');
+    const confirmbutton = document.getElementById('confirm');
+    const clearcartbutton = document.getElementById('delete');
+
+
+
+    const headers = new Headers({
+      'Authorization': `Bearer ${authToken}`,
+      'Content-Type': 'application/json'
+    });
+   
+    
+
+    // Fetch book data from the API
+    function getcartbooks() {
+      fetch('https://localhost:44310/api/Bag/getallbooks', {
+        method: "GET",
+        headers: headers
+      })
+        .then(response => response.json())
+        .then(data => {
+          //showPopup(data);
+          data.forEach(book => {
+            const row = document.createElement('tr');
+
+            const titleCell = document.createElement('td');
+            titleCell.textContent = book.bookTitle;
+            row.appendChild(titleCell);
+
+            const authorCell = document.createElement('td');
+            authorCell.textContent = book.bookAuthor;
+            row.appendChild(authorCell);
+
+            const imageCell = document.createElement('td');
+            const image = document.createElement('img');
+            image.src = book.bookImage;
+            image.alt = book.Title;
+            imageCell.appendChild(image);
+            row.appendChild(imageCell);
+
+            const selectCell = document.createElement('td');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = book.bookIds;
+            selectCell.appendChild(checkbox);
+            row.appendChild(selectCell);
+   
+
+            const actionCell = document.createElement('td');
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => {
+              removeBookFromCart(book.bagId);
+            });
+            actionCell.appendChild(deleteButton);
+            row.appendChild(actionCell);
+
+            bookTableBody.appendChild(row);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+    // Function to remove a book from the cart
+    function removeBookFromCart(bookId) {
+      fetch(`https://localhost:44310/api/Bag/removebook/${bookId}`, {
+        method: 'DELETE',
+        headers: headers
+      })
+        .then(response => response.json())
+        .then(data => {
+          data.respone;
+          location.reload();
+        })
+        .catch(error => {
+          console.error('Error removing book:', error);
+        });
+    }
+
+
+    //function to order book
+    function confirmOrder() {
+      const selectedBooks = Array.from(bookTableBody.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(checkbox => checkbox.value);
+
+      if (selectedBooks.length === 0) {
+        
+        message = 'Please select atleast one book to borrow.';
+        //messageElement.textContent = message;
+        showPopup(message);
+        return;
+      }
+
+      fetch('https://localhost:44310/api/Borrow/borrowbook', {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({ bookIds: selectedBooks })
+      })
+        .then(response => response.json())
+        .then(data => {
+          const redirectButton = document.getElementById('redirectButton');
+
+          const code = data.borrowCode;
+          const message = "Borrow is Succesful";
+          console.log(data);
+          const messageHTML = `
+                 Message: ${message}
+                 You have borrowed the books with code [${code}].
+              `;
+          redirectButton.style.display = 'block';
+         // messageElement.textContent = messageHTML;
+          showPopup(messageHTML);
+          //window.location.href="borrow.html";
+        })
+        .catch(error => {
+          showPopup("Please return The borrowed books first.");
+        });
+      //window.location.href="borrow.html";
+
+    }
+    confirmbutton.addEventListener('click', confirmOrder);
+    -   function redirectToAnotherPage() {
+      window.location.href = "borrow.html";
+    }
+
+    getcartbooks();
+
+
+  </script>
+  t
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:App2.ViewModels"
+             xmlns:vm="clr-namespace:App2.ViewModels"
+             x:DataType="viewmodels:BaseViewModel"           
+             x:Class="App2.MainPage"
+             BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+
+        <vm:BaseViewModel x:Name="vm" />
+
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="*,*">
+
+        <StackLayout Grid.Row="1" Spacing="8" Margin="0,-70,0,0">
+
+            <Image Source="book.png" WidthRequest="130" Margin="0,-150,0,10" />
+            <StackLayout HorizontalOptions="Center" Grid.Column="1" Orientation="Horizontal" Spacing="10">
+                <Label Text="Welcome to" FontSize="25" FontFamily="Cabin" TextColor="#FC6011" />
+                <Label Text="LibraPro" FontSize="25" FontFamily="Cabin" TextColor="#4A4B4D" />
+
+            </StackLayout>
+
+            <Label Text="Accessing Knowledge" FontSize="13" CharacterSpacing="3" FontFamily="Metropolis" HorizontalOptions="Center" TextColor="#4A4B4D" />
+            <Label HorizontalTextAlignment="Center" Text="Discover the best books from Pimville Library through LibraPro" FontSize="13" CharacterSpacing="3" FontFamily="Metropolis" HorizontalOptions="Center" Margin="40,40,40,60" TextColor="#4A4B4D" />
+            <Button Command="{Binding TOLogin}" Text="Sign In" BackgroundColor="#FC6011" WidthRequest="375" HeightRequest="47" HorizontalOptions="Center" CornerRadius="30"/>
+            <Button Command="{Binding TORegister}" Text="Create an Account" BackgroundColor="white" TextColor="#FC6011" BorderWidth="2" BorderColor="#FC6011" WidthRequest="375" HeightRequest="47" HorizontalOptions="Center" CornerRadius="30"/>
+           <!-- <Button x:DataType="viewmodels:NotificationViewModel" Command="{Binding LcalNotificationCommand}" Text="On/Off>" BackgroundColor="white" TextColor="#FC6011" BorderWidth="2" BorderColor="#FC6011" WidthRequest="375" HeightRequest="47" HorizontalOptions="Center" CornerRadius="30"  />-->
+        </StackLayout>
+
+       
+    </Grid>
+
+
+</ContentPage>

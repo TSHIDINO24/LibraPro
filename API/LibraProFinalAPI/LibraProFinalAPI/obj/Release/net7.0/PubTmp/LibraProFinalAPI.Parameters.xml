@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="fortunemalatji-001-site1" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Tshidilo\\Desktop\\DebugCoders\\team11-dev\\LibraProFinalAPI\\LibraProFinalAPI\\obj\\Release\\net7\.0\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="LibraProFinalAPI.Models.LibraProFinalContext" description="" value="Data Source=SQL5063.site4now.net;Initial Catalog=db_a9cd97_libraprodata;User Id=db_a9cd97_libraprodata_admin;Password=YOUR_DB_PASSWORD" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\Tshidilo\\Desktop\\DebugCoders\\team11-dev\\LibraProFinalAPI\\LibraProFinalAPI\\obj\\Release\\net7\.0\\PubTmp\\EFSQLScripts\\LibraProFinalAPI\.Models\.LibraProFinalContext\.sql$" />
+  </parameter>
+</parameters>

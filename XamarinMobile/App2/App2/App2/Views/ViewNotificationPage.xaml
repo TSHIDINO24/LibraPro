@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Views.ViewNotificationPage">
+    <ContentPage.Content>
+        <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*">
+          
+            <Label x:Name="NotificationType" Text="Reminder"           
+             HorizontalOptions="CenterAndExpand" Grid.Row="0"
+             Margin="-105,10,0,0"
+             FontSize="18"     
+             TextColor="black"/>
+            <Frame Grid.Row="1" BorderColor="#fc6011" CornerRadius="30" Padding="10" Margin="0,-120,-190,270">
+                <Label 
+                    x:Name="NotificationDetails"
+                    TextColor="black"
+                   Text="This Engineering book is due in 2 days on 22/09/2023"/>
+            </Frame>
+            <Label
+                x:Name="NotificationDate"
+                Grid.Row="0"
+                Margin="0,50,-160,0"
+                HorizontalOptions="Center"
+                TextColor="Black"
+                />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

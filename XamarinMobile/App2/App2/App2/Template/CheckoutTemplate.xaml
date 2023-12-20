@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Template.CheckoutTemplate"
+             xmlns:fontawesome="clr-namespace:App1.Utility">
+
+    <Grid x:Name="grid" ColumnDefinitions="Auto,*,Auto" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout Grid.Column="0" Spacing="5" >
+            <Label x:Name="lblBagCircle" Text="{x:Static fontawesome:Solid.Circle}"
+                   HorizontalOptions="Center" TextColor="#4A4B4D">
+            </Label>
+            <Label x:Name="lblBagIcon" FontSize="20" Text="{x:Static fontawesome:Solid.Cart_Plus}"
+                   HorizontalOptions="Center" TextColor="#4A4B4D">
+            </Label>
+        </StackLayout>
+
+        <Line x:Name="DottedLine" X1="15" Y1="0" X2="200" Y2="0" Stroke="{x:DynamicResource Primary}"
+              Margin="0,5,0,0" VerticalOptions="Center" 
+              StrokeDashArray="5,5" Grid.Column="1" HorizontalOptions="FillAndExpand">
+
+        </Line>
+
+        <StackLayout Grid.Column="2" Spacing="5">
+            <Label x:Name="lblReceiptCircle" Text="{x:Static fontawesome:Solid.Circle}"
+                   HorizontalOptions="Center" TextColor="#4A4B4D">
+            </Label>
+            <Label x:Name="lblReceiptIcon" FontSize="20" Text="{x:Static fontawesome:Solid.Receipt}"
+                   HorizontalOptions="End" TextColor="#4A4B4D">
+
+            </Label>
+        </StackLayout>
+    </Grid>
+
+</ContentView>

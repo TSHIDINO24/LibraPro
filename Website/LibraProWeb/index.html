@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Website</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      text-decoration: none;
+    }
+
+    .popup {
+      
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background-color: white;
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .search-input {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .genre-filter {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: white;
+      width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .genre-filter option {
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+      color: gray;
+    }
+
+    .grid-item {
+      border: 1px solid #ccc;
+      border-radius: 9px;
+      padding: 20px;
+      width: 150px;
+      height: 150px;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: .5s;
+    }
+
+    .grid-item:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-5px);
+      color: orange;
+    }
+
+    .grid-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .featured-books {
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Apply styling to the book cards */
+    .book-card {
+      width: 200px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    /* Style for the book cover image */
+    .book-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    /* Style for book title and author */
+    .book-card h3 {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .book-card p {
+      margin: 0;
+      font-size: 14px;
+      color: #888;
+    }
+
+    /* Animation for automatic sliding */
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-100%);
+      }
+
+      50% {
+        transform: translateX(-200%);
+      }
+
+      75% {
+        transform: translateX(-300%);
+      }
+
+      100% {
+        transform: translateX(-400%);
+      }
+    }
+
+    /* Apply the sliding animation to the featured books container */
+    .cover {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .featured-books {
+      animation: slide 25s linear infinite;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 20px;
+    }
+
+    .book {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      transition: 0.5s;
+    }
+
+    .book:hover {
+      color: #fc6011;
+      box-shadow: 0 0 20px #888;
+      transform: translateY(-5px);
+    }
+
+    .title {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .author,
+    .genre {
+      font-size: 1rem;
+      margin: 8px 0;
+    }
+
+    .description {
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <div class="header-left">
+        <h1>LibraPro</h1>
+        <nav>
+          <ul>
+            <li><a href="Home.html">Home</a></li>
+            <!--<li><a href="index1.html">Books</a></li>-->
+            <li><a href="team.html">Team</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="header-right">
+          <a href="Login.html" id="loginTab" class="btn sign-in"><span><i class="fas fa-sign-in-alt"></i></span>Sign
+            In</a>
+          <a href="Register.html" id="signupTap" class="btn sign-up"><span><i class="fas fa-user-plus"></i></span>Sign
+            Up</a>
+          <a href="pop.html" id="logoutTap" style="display: none;" class="btn sign-up"><span><i
+                class="fas fa-user-plus"></i></span>Sign Up</a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+  <section>
+    <div class="infolog">
+      <h1>Welcome to LibraPro Library</h1>
+      <p>Your gateway to a world of books awaits you!</p>
+      <input type="text" id="searchinput" class="search-input" placeholder="Search by title or author">
+      <select id="genreFilter" class="genre-filter">
+        <option value="all">All Genres</option>
+        <option value="Classic Fiction">Classic Fiction</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Literary Fiction">Literary Fiction</option>
+        <option value="Dystopian">Dystopian</option>
+        <option value="Romance">Romance</option>
+      </select>
+      <div class="book-grid">
+       
+          <div class="book">
+            <img
+              src="https://th.bing.com/th/id/R.854341011b25e7e46838b0fa85b855d8?rik=p%2fH6AkEvu8YSSQ&riu=http%3a%2f%2fmunchweb.com%2fwp-content%2fuploads%2f2017%2f10%2frich-dad-poor-dad.jpg&ehk=o%2blotA90urbje4Hjt8b%2bzgDwO5bTE%2b3yyHaOIRZFy8g%3d&risl=&pid=ImgRaw&r=0"
+              alt="Book Cover" class="cover">
+            <h2 class="title"><a href="#" id="openPopupBtn">Rich Dad Poor Dad</a></h2>
+            <p class="author">F. Scott Fitzgerald</p>
+            <p class="genre">Classic Fiction</p>
+            <p class="description">A tale of wealth, love, and the American Dream.</p>
+          </div>
+        <div class="book">
+          <img src="https://clipground.com/images/ai-icon-png-20.png" alt="Book Cover" class="cover">
+          <h2 class="title">Artificial Intelligence and Machine Learning</h2>
+          <p class="author">CYNTHIA BREAZEAL</p>
+          <p class="genre">Technology</p>
+          <p class="description">The start of a young wizard's journey at Hogwarts School.</p>
+        </div>
+        <div class="book">
+          <img src="img/category-filter-img-07.jpg" alt="Book Cover" class="cover">
+          <h2 class="title">To Kill a Mockingbird</h2>
+          <p class="author">Harper Lee</p>
+          <p class="genre">Literary Fiction</p>
+          <p class="description">A powerful exploration of racial injustice and moral growth.</p>
+        </div>
+        <div class="book">
+          <img src="img/category-filter-img-02.jpg" alt="Book Cover" class="cover">
+          <h2 class="title">1984</h2>
+          <p class="author">George Orwell</p>
+          <p class="genre">Dystopian</p>
+          <p class="description">A dystopian vision of a totalitarian future and thought control.</p>
+        </div>
+        <div class="book">
+          <img src="img/category-filter-img-04.jpg" alt="Book Cover" class="cover">
+          <h2 class="title">Pride and Prejudice</h2>
+          <p class="author">Jane Austen</p>
+          <p class="genre">Romance</p>
+          <p class="description">The witty courtship of Elizabeth Bennet and Mr. Darcy.</p>
+        </div>
+        <div class="book">
+          <img src="img/category-filter-img-01.jpg" alt="Book Cover" class="cover">
+          <h2 class="title">The Hobbit</h2>
+          <p class="author">J.R.R. Tolkien</p>
+          <p class="genre">Fantasy</p>
+          <p class="description">An adventurous journey of a hobbit, dwarves, and a dragon.</p>
+        </div>
+      </div>
+    </div>
+    
+    
+  </section style="background:linear-gradient(35deg, gray, white, orange, black)">
+  <h1 style="text-align: center;">Featured Books</h1>
+
+  <div class="featured-books">
+    <div class="book-card">
+      <img src="img/category-filter-img-01.jpg" alt="Book 1">
+      <h3>Book Title 1</h3>
+      <p>Author Name</p>
+    </div>
+    <div class="book-card">
+      <img src="img/category-filter-img-02.jpg" alt="Book 2">
+      <h3>Book Title 2</h3>
+      <p>Author Name</p>
+    </div>
+    <div class="book-card">
+      <img src="img/category-filter-img-04.jpg" alt="Book 1">
+      <h3>Book Title 1</h3>
+      <p>Author Name</p>
+    </div>
+    <div class="book-card">
+      <img src="img/category-filter-img-03.jpg" alt="Book 2">
+      <h3>Book Title 2</h3>
+      <p>Author Name</p>
+    </div>
+    <div class="book-card">
+      <img src="img/category-filter-img-05.jpg" alt="Book 1">
+      <h3>Book Title 1</h3>
+      <p>Author Name</p>
+    </div>
+    <div class="book-card">
+      <img src="img/category-filter-img-06.jpg" alt="Book 2">
+      <h3>Book Title 2</h3>
+      <p>Author Name</p>
+    </div>
+  </div>
+
+  <section id="cta-section">
+    <h2>Start Borrowing Today!</h2>
+    <p>Join our online library community to access thousands of books at your fingertips.</p>
+    <a href="Register.html" class="cta-button">Register Now</a>
+    <p>Already a member? <a href="Login.html">Log in</a></p>
+  </section>
+  <footer>
+    <div class="contact-info">
+      <h3>CONTACT INFORMATION</h3>
+      <p>Email: <a href="LibraPro@gmail.com">LibraPro@gmail.com</a></p>
+      <p>Phone: (+27) 68 741 9876</p>
+    </div>
+    <div class="social-media">
+      <h3>SOCIAL MEDIA</h3>
+      <ul>
+        <li><a href="https://www.facebook.com/" target="_blank"><box-icon type='logo' name='facebook'></box-icon></a>
+        </li>
+        <li><a href="https://www.twitter.com/" target="_blank"><box-icon type='logo' name='twitter'></box-icon></a></li>
+        <li><a href="https://www.instagram.com/" target="_blank"><box-icon type='logo' name='instagram'></box-icon></a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+  <script src="https://unpkg.com/boxicons@2.1.3/dist/boxicons.js"></script>
+
+  <script>
+
+    const openPopupLink = document.getElementById('openPopupLink');
+    const closePopupBtn = document.getElementById('closePopupBtn');
+    const popup = document.getElementById('popup');
+
+    openPopupLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      popup.style.display = 'block';
+    });
+
+    closePopupBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+      if (event.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+
+    //index search logic
+    const searchInput = document.getElementById('searchInput');
+    const genreFilter = document.getElementById('genreFilter');
+    const books = document.querySelectorAll('.book');
+
+    searchInput.addEventListener('input', filterBooks);
+    genreFilter.addEventListener('change', filterBooks);
+
+    function filterBooks() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const selectedGenre = genreFilter.value;
+
+      books.forEach(book => {
+        const title = book.querySelector('.title').textContent.toLowerCase();
+        const author = book.querySelector('.author').textContent.toLowerCase();
+        const genre = book.querySelector('.genre').textContent;
+
+        const matchesSearchTerm = title.includes(searchTerm) || author.includes(searchTerm);
+        const matchesGenre = selectedGenre === 'all' || genre === selectedGenre;
+
+        if (matchesSearchTerm && matchesGenre) {
+          book.style.display = 'block';
+        } else {
+          book.style.display = 'none';
+        }
+      });
+    }
+
+    // Initial filter
+    filterBooks();
+
+  </script>
+</body>
+
+</html>

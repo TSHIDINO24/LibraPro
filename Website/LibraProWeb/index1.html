@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Grid</title>
+</head>
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .search-container {
+      text-align: center;
+      margin: 20px;
+    }
+
+
+    #bookGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .book-item {
+      display: flex;
+      border: 1px solid #ccc;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-image {
+      flex: 0 0 150px;
+    }
+
+    .book-details {
+      flex: 1;
+      padding: 10px;
+    }
+
+    .book-details h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    .book-details p {
+      margin: 5px 0;
+    }
+  </style>
+  <body>
+    <header>
+        <div class="container">
+          <div class="header-left">
+            <h1>LibraPro</h1>
+            <nav>
+              <ul>
+                <li><a href="Home.html" id="homeLink">Home</a></li>
+                <li><a href="index1.html" id="shopLink">Books</a></li>
+                <li><a href="team.html" id="teamLink">Team</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </nav>
+            <div class="header-right">
+              <div class="profile-container">
+                <img src="malatji.jpg" alt="User Profile" class="profile-image">
+                <div class="dropdown-content">
+                  <a href="#" class="dropdown-item">Edit Profile</a>
+                  <a href="#" class="dropdown-item">Borrowed Books</a>
+                  <a href="#" class="dropdown-item">Settings</a>
+                  <a href="index.html" class="dropdown-item" id="logout">Log Out</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <h1 style="text-align: center;">Reserved Books.</h1>
+  
+      
+  <div id="bookGrid"></div>
+
+   <!-- Footer -->
+   <footer>
+    <div class="contact-info">
+        <h3>CONTACT INFORMATION</h3>
+        <p>Email: <a href="LibraPro@gmail.com">LibraPro@gmail.com</a></p>
+        <p>Phone: (+27) 68 741 9876</p>
+    </div>
+    <div class="social-media">
+        <h3>SOCIAL MEDIA</h3>
+        <ul>
+            <li><a href="https://www.facebook.com/" target="_blank"><box-icon type='logo' name='facebook'></box-icon></a></li>
+            <li><a href="https://www.twitter.com/" target="_blank"><box-icon type='logo' name='twitter'></box-icon></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank"><box-icon type='logo' name='instagram'></box-icon></a></li>
+        </ul>
+    </div>
+</footer>
+  <script>
+    const apiUrl = "https://greatsparklyrock35.conveyor.cloud/api/Bag/userreservedbooks";
+    const bookGrid = document.getElementById("bookGrid");
+
+      
+    function getCookie(name) {
+  const value = "; " + document.cookie;
+  const parts = value.split("; " + name + "=");
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+ const authToken = getCookie("sessionToken");
+
+    const headers = new Headers();
+    headers.append('Authorization', `Bearer ${authToken}`);
+
+    fetch(apiUrl, { headers })
+      .then(response => response.json())
+      .then(data => {
+        let filteredData = data; // Store the original data
+        
+        // Update the displayed books based on search input
+       
+          displayBooks(filteredData);
+        
+        displayBooks(filteredData); 
+      })
+      .catch(error => console.error("Error fetching data:", error));
+
+    function displayBooks(books) {
+      bookGrid.innerHTML = ""; 
+      
+      books.forEach(book => {
+        const bookElement = document.createElement("div");
+        bookElement.classList.add("book-item");
+        bookElement.innerHTML = `
+          <div class="book-image">
+            <img src="${book.bookImage}" alt="${book.title}" width="150" height="150">
+          </div>
+          <div class="book-details">
+            <h3><strong>${book.bookTitle}</strong></h3>
+            <p><strong>Author</strong>: ${book.bookAuthor}</p>
+          </div>
+        `;
+        bookGrid.appendChild(bookElement);
+      });
+    }
+  </script>
+
+</body>
+</html>

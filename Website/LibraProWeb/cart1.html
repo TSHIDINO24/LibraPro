@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="js/style.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+          <div class="header-left">
+            <h1>LibraPro</h1>
+            <nav>
+              <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="index1.html">Books</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </nav>
+            
+            <div class="header-right">
+              <a href="index.html" class="btn sign-in"><span><i class="fas fa-sign-in-alt"></i></span>Sign Out</a>
+            </div>
+          </div>
+          
+        </div>
+      </header>
+    
+    
+    <h1>Book Bag</h1>
+    <div class="cart-items">
+        <table id="cart-items">
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Book Author</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <div class="buttons">
+        <button onclick="clearCart()">Clear Cart</button>
+        <button onclick="confirmOrder()">Confirm Order</button>
+    </div>
+
+    <footer>
+      <div class="contact-info">
+          <h3>CONTACT INFORMATION</h3>
+          <p>Email: <a href="LibraPro@gmail.com">LibraPro@gmail.com</a></p>
+          <p>Phone: (+27) 68 741 9876</p>
+      </div>
+      <div class="social-media">
+          <h3>SOCIAL MEDIA</h3>
+          <ul>
+              <li><a href="https://www.facebook.com/" target="_blank"><box-icon type='logo' name='facebook'></box-icon></a></li>
+              <li><a href="https://www.twitter.com/" target="_blank"><box-icon type='logo' name='twitter'></box-icon></a></li>
+              <li><a href="https://www.instagram.com/" target="_blank"><box-icon type='logo' name='instagram'></box-icon></a></li>
+          </ul>
+      </div>
+  </footer>
+
+    <script src="js/cart.js"></script>
+</body>
+</html>

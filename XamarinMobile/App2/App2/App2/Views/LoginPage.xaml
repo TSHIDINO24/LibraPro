@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="App2.Views.LoginPage"
+              
+              BackgroundColor="white"
+             NavigationPage.HasNavigationBar="False"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+        <StackLayout Spacing="40" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+            <Label Text="Sign In" FontSize="30" HorizontalTextAlignment="Center" FontFamily="Metropolis" Margin="0,50,0,0" TextColor="#4A4B4D"/>
+            <Label Text="Enter your credentials to sign in" Margin="0,10,0,0" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontSize="15" FontFamily="Metropolis" TextColor="#4A4B4D"/>
+
+            <Frame CornerRadius="30" BackgroundColor="White" BorderColor="#4A4B4D" HasShadow="False" WidthRequest="250" HeightRequest="20" Margin="10,40,10,0">
+                <Entry x:Name="txtemail" HorizontalTextAlignment="Start" TextColor="Black" FontSize="Medium" PlaceholderColor="Black" Placeholder="Email" Margin="0,-30,0,-30" ></Entry>
+            </Frame>
+
+            <Frame CornerRadius="30" BackgroundColor="White" BorderColor="#4A4B4D" HasShadow="False" WidthRequest="350" HeightRequest="20" Margin="10,-10,10,0" >
+                <Entry x:Name="txtpass" HorizontalTextAlignment="Start" TextColor="Black" IsPassword="True" FontSize="Medium" PlaceholderColor="Black" Placeholder="Password" Margin="0,-30,0,-30"></Entry>
+            </Frame>
+
+
+            <Button
+                VerticalOptions="Center"
+                Text="Sign In"
+                TextColor="White"
+                BackgroundColor="#FC6011"
+                BorderWidth="2"
+                Margin="10,40,10,0"
+                CornerRadius="30"
+                Clicked="Button_Clicked"
+                ></Button>
+
+            <Label HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Don't have an account? " TextColor="#4A4B4D"/>
+                        <Span Text="Sign Up" TextColor="#FC6011" FontAttributes="Bold" TextDecorations="Underline"/>
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                </Label.GestureRecognizers>
+            </Label>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Standalone Bar Graph</title>
+  <style>
+    #chartContainer {
+      width: 40%; /* Adjust this to control chart width */
+      height: 30%;
+      margin: 0 auto;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div id="chartContainer">
+    <canvas id="barChart" height="300"></canvas>
+  </div>
+  <input type="text" id="searchInput" placeholder="Enter Borrow Code">
+<button id="deleteButton">Delete</button>
+<table>
+    <tbody id="data"></tbody>
+</table>
+
+
+  <script>
+const apiUrl = "https://fastsparklybook3.conveyor.cloud/api/Checkout/getallcheckedoutbooks";
+const tbody = document.getElementById("data");
+const searchInput = document.getElementById("searchInput");
+const deleteButton = document.getElementById("deleteButton");
+
+let searchBorrowCode = "";
+
+// Function to fetch data from the API and populate the table
+function fetchDataAndPopulateTable() {
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            // Clear the table before populating with new data
+            tbody.innerHTML = "";
+
+            data.forEach(book => {
+                const row = document.createElement("tr");
+                row.dataset.borrowCode = book.borrowCode; // Store borrow code as a dataset attribute
+
+                // Populate table cells with book data
+                row.innerHTML = `
+                    <td>${book.userId}</td>
+                    <td>${book.bookTitle}</td>
+                    <td>${book.borrowDate}</td>
+                    <td>${book.borrowReturnedDate}</td>
+                    <td>${book.borrowCode}</td>
+                    <td>${book.status}</td>
+                `;
+
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => console.error("Error fetching data:", error));
+}
+
+// Function to delete books by their borrow code
+function deleteBooksByCode(borrowCode) {
+    const deleteUrl = `https://firstredpage81.conveyor.cloud/api/Checkout/checkInbycode?borrowCode=${borrowCode}`;
+
+    fetch(deleteUrl, {
+        method: "DELETE"
+    })
+    .then(response => {
+        if (response.ok) {
+            // Remove rows with the same borrow code from the table
+            const rowsToDelete = document.querySelectorAll(`tr[data-borrow-code="${borrowCode}"]`);
+            rowsToDelete.forEach(row => row.remove());
+            alert(`All books with borrow code ${borrowCode} have been checked in and deleted.`);
+        } else {
+            alert("Error deleting books.");
+        }
+    })
+    .catch(error => {
+        console.error("Error deleting books:", error);
+    });
+}
+
+// Event listener for search input's keyup event
+searchInput.addEventListener("keyup", event => {
+    searchBorrowCode = event.target.value.trim();
+});
+
+// Event listener for delete button click
+deleteButton.addEventListener("click", () => {
+    if (searchBorrowCode) {
+        deleteBooksByCode(searchBorrowCode);
+    } else {
+        alert("Please enter a borrow code.");
+    }
+});
+
+// Call the function to fetch data and populate the table initially
+fetchDataAndPopulateTable();
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open PDF Popup</title>
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 80%;
+            width: 80%; 
+            max-width: 800px;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            padding: 20px;
+        }
+              
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        iframe {
+            width: 80%; /* Adjust the width as needed */
+            height: 80vh; /* Adjust the height as needed */
+            /*border: none;*/
+        }
+    </style>
+</head>
+<body>
+    <a href="#" id="openPopup">Open PDF</a>
+
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="pdfPopup">
+        <iframe src="9780521871785_excerpt.pdf" width="100%" height="100%"></iframe>
+        <button id="closePopup">Close</button>
+    </div>
+
+    <script>
+        const openPopupButton = document.getElementById('openPopup');
+        const closePopupButton = document.getElementById('closePopup');
+        const popup = document.getElementById('pdfPopup');
+        const popupOverlay = document.getElementById('popupOverlay');
+
+        openPopupButton.addEventListener('click', () => {
+            popup.style.display = 'block';
+            popupOverlay.style.display = 'block';
+        });
+
+        closePopupButton.addEventListener('click', () => {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

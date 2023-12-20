@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:App1.ViewModels"            
+             xmlns:fontawesome="clr-namespace:App1.Utility"
+             xmlns:viewmodels="clr-namespace:App2.ViewModels" 
+             x:DataType="viewmodels:BookVewModel"
+             x:Class="App2.Template.BagListTemplate">
+
+    <StackLayout  Padding="10">
+        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="100,*" ColumnSpacing="10" >
+            <Frame CornerRadius="20" Padding="0" Grid.Row="0" Grid.ColumnSpan="3">
+                <Image Source="{Binding Image}"  WidthRequest="100" Aspect="Fill" HeightRequest="100"></Image>
+            </Frame>
+            <Label Text="{Binding BookName}" FontSize="18" TextColor="#4A4B4D" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="1" Spacing="10">
+                <Label Text="{Binding Category}" TextColor="#4A4B4D" FontSize="10" FontAttributes="Bold"></Label>
+                <Label Text="{Binding AuthorName}" TextColor="#4A4B4D" FontSize="10" FontAttributes="Bold"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="10" Grid.Row="2" Grid.Column="1">
+                <Label Text="{x:Static fontawesome:Solid.Trash}" TextColor="red" FontSize="18"></Label>
+                <Label Text="Remove" FontSize="15" TextColor="red" FontAttributes="Bold"></Label>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
+
+</ContentView>

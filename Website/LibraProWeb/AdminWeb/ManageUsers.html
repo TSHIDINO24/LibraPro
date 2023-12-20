@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="css/dashboardstyle.css">
+	<title>LibraPro Library - Manage Users</title>
+	<style>
+		#myTable {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 20px;
+
+        }
+
+        #myTable th,
+        #myTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #myTable th {
+            background-color: #f2f2f2;
+        }
+
+        #myTable img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 8px;
+        }
+
+        #myTable button {
+            padding: 5px 10px;
+        }
+	</style>
+</head>
+<body>
+<!-- SIDEBAR -->
+<section id="sidebar">
+	<a href="#" class="brand">
+		<i class='bx bxs-book'></i>
+		<span class="text">LibraPro</span>
+	</a>
+	<ul class="side-menu top">
+		<li>
+			<a href="index.html" class="nav-link.manage-users">
+				<i class='bx bxs-dashboard'></i>
+				<span class="text">Dashboard</span>
+			</a>
+		</li>
+		<li>
+			<a href="ManageUsers.html" class="nav-link.manage-users">
+				<i class='bx bxs-user'></i>
+				<span class="text">Manage Users</span>
+			</a>
+		</li>
+		<li>
+			<a href="ManageBooks.html" class="nav-link">
+				<i class='bx bxs-book'></i>
+				<span class="text">Manage Books</span>
+			</a>
+		</li>
+		<!--li>
+				<a href="ManageDamagedBooks.html" class="nav-link">
+					<i class='bx bxs-book'></i>
+					<span class="text">Manage Damaged Books</span>
+				</a>
+			</li-->
+		<!--li>
+			<a href="FineManagement.html" class="nav-link">
+				<i class='bx bxs-book'></i>
+				<span class="text">Manage Fines</span>
+			</a>
+		</li>
+		<li>
+			<a href="NotificationPage.html" class="nav-link">
+				<i class='bx bxs-message-dots' ></i>
+				<span class="text">Notifications</span>
+			</a>
+		</li-->
+		<li>
+			<a href="PendingOrders.html" class="nav-link">
+				<i class='bx bxs-message-dots' ></i>
+				<span class="text">Pending Orders</span>
+			</a>
+		</li>
+		<li>
+			<a href="CheckedOutBooksPage.html" class="nav-link">
+				<i class='bx bxs-shopping-bag-alt'></i>
+				<span class="text">Checked Out Books</span>
+			</a>
+		</li>
+		<li>
+			<a href="\LibraProWeb\index.html" class="nav-link">
+				<i class='bx bxs-user'></i>
+				<span class="text">Logout</span>
+			</a>
+		</li>
+	 </ul>
+	</div>
+	</section>
+<!-- SIDEBAR -->
+
+<!--CONTENT-->
+<section id="content">
+
+       <!-- NAVBAR -->
+	   <nav>
+
+		<a href="#" class="nav-link"></a>
+		<form action="#">
+
+		</form>
+		<input type="checkbox" id="switch-mode" hidden>
+		<a href="#" class="notification">
+			<i class='bx bxs-bell'></i>
+			<span id="notificationCount" class="num">0</span>
+		</a>
+		<ul id="notificationList"></ul>
+
+		<div class="dropdown">
+			<a href="#" class="profile">
+				<img src="img/user.png">
+			</a>
+			<div class="dropdown-content">
+				<a href="\LibraProWeb\index.html">LogOut</a>
+				<a href="#">Settings</a>
+			</div>
+		</div>
+	</nav>
+	<!-- NAVBAR -->
+
+      	<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Manage Users</h1>
+			</div>
+            </div>
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-user'></i>
+						<!--<span class="icon">
+							<img src="img/user.png">
+						</span> -->
+						<span class="text">
+							<h3 id="UsersTotal">0</h3>
+							<p>Users</p>
+						</span>
+				</li>
+
+				<li>
+					<i class='bx bxs-user'></i>
+						<!--<span class="icon">
+							<img src="img/user.png">
+						</span> -->
+						<span class="text">
+							<h3 id="DeactivatedUsersTotal">0</h3>
+							<p>Deactivated Users</p>
+						</span>
+				</li>
+			</ul>
+
+            <div class="head">
+                <h3>Active Users</h3>
+                <div class="form-input">
+                    <input type="search" placeholder="Filter..." id="myInput" onkeyup="myFunction()">
+                </div>
+            </div>
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<!--h3>Recent Borrows</h3>
+						<div class="form-input">
+							<input type="search" placeholder="Search..." id="myInput" onkeyup="myFunction()">
+						</div>
+						<i class='bx bx-filter' ></i>
+						<button id="openCameraButton">Open Camera</button>
+						<div id="cameraModal" class="modal">
+						  <div class="modal-content">
+							<video id="preview" style="width: 100%; height: 100%;"></video>
+						  </div>
+						</div-->
+					</div>
+					<table id="myTable">
+						<thead>
+							<tr>
+								<th>Name</th>
+                                <th>Surname</th>
+                                <th>ID Number</th>
+                                <th>Email</th>
+                                <!--<th>Home Address</th> -->
+                                <th>Phone Number</th>
+                                <!--<th>User Type</th> -->
+                                <th>User Status</th>
+                                <th>Created Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody id="data_table1">
+					
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+</section>
+<!-- CONTENT -->
+
+<script>
+
+
+/////////////////////////////////////////////////////////////////TOTALS
+// Function to fetch data from the API
+async function TotalfetchData(apiEndpoint) {
+    try {
+        const response = await fetch(apiEndpoint);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return null;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async function() {
+
+    // Fetch data from the APIs
+    const usersData = await TotalfetchData('https://localhost:44310/api/User/getallusers');
+
+    if (usersData) {
+        // Calculate counts based on list lengths
+        const userTotal = usersData.length;      
+
+        // Update the HTML with calculated totals
+        document.getElementById("UsersTotal").textContent = userTotal;    
+    }
+});
+
+
+
+
+    function getCookie(name) {
+      const value = "; " + document.cookie;
+      const parts = value.split("; " + name + "=");
+      if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+
+    const authToken = getCookie("sessionToken");
+
+    const headers = new Headers({
+      'Authorization': `Bearer ${authToken}`,
+      'Content-Type': 'application/json'
+    });
+
+    //Filtering the table by the user name
+		function myFunction() {
+			// Declare variables
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+
+			// Loop through all table rows, and hide those who don't match the search query
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[0];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+
+   //Fuction to populate the users table
+   function populateUsersTable(data) {
+	    var tableBody = document.getElementById('data_table1');
+        tableBody.innerHTML = ''; // Clear existing data
+
+		data.forEach(function(User){
+            var row = document.createElement('tr');
+
+            var NameCell = document.createElement('td');
+            NameCell.textContent = User.userName;
+            row.appendChild(NameCell);
+
+			var SurnameCell = document.createElement('td');
+            SurnameCell.textContent = User.userSurname;
+            row.appendChild(SurnameCell);
+    
+            var identityCell = document.createElement('td');
+            identityCell.textContent = User.userIdnumber;
+            row.appendChild(identityCell);
+    
+            var emailCell = document.createElement('td');
+            emailCell.textContent = User.userEmail;
+            row.appendChild(emailCell);
+
+			var userPhoneCell = document.createElement('td');
+            userPhoneCell.textContent = User.userPhone;
+            row.appendChild(userPhoneCell);
+    
+            var userStatusCell = document.createElement('td');
+            userStatusCell.textContent = User.userStatus;
+            row.appendChild(userStatusCell);
+    
+			var userCreatedDateCell = document.createElement('td');
+            userCreatedDateCell.textContent = User.userCreatedDate;
+            row.appendChild(userCreatedDateCell);
+
+            var actionCell = document.createElement('td');
+            var deactivateButton = document.createElement('button');
+			deactivateButton.className = 'action-button';
+			deactivateButton.textContent = 'Deactivate';
+			deactivateButton.addEventListener('click', function() {
+                console.log(User);
+				deactivateUser(User.userId);
+			});
+            //console.log(user.userId);
+            actionCell.appendChild(deactivateButton);
+			row.appendChild(actionCell);
+
+            tableBody.appendChild(row);
+
+        });
+   }
+
+//function to deactivate user(by changing the status)
+function deactivateUser(userId) {
+    console.log(userId);
+      fetch(`https://localhost:44310/api/User/updateuserstatus/${userId}`, {
+        method: 'PUT',
+        headers: headers
+      })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+          //Update the user's status in the UI
+          const userStatusCell = document.querySelector(`#data_table1 tr[data-userId="${userId}"] td.user-status`);
+          if(userStatusCell) {
+            userStatusCell.textContent = 'Deactivated';
+          }
+          //data.respone;
+          location.reload();
+          
+            // Store the updated status in localStorage
+            //localStorage.setItem(`user_status_${userId}`, 'Deactivated');
+        })
+        .catch(error => {
+          console.error('Error updating user status:', error);
+        });
+    }
+
+
+   // an API request to populate the table
+   fetch('https://localhost:44310/api/User/getallusers')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+          console.log('Fetched data:', data); 
+          // Call the function that uses the fetched data
+          populateUsersTable(data);
+        })
+        
+         .catch(error => console.error('Error fetching data:', error));
+
+	
+</script>
+    <!--<script src="js/dashboardscript.js"></script>
+    <script src="js/User.js"></script>
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>  -->
+</body>
+</html>

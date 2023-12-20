@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Views.NotificationPage"
+             xmlns:local="clr-namespace:App2.ViewModels"
+             xmlns:models="clr-namespace:App2.Models"
+             Title="Notifications">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  x:Name="NumNotifications"/>
+    </ContentPage.ToolbarItems>
+
+    <RefreshView x:DataType="local:NotificationViewModel" Command="{Binding LoadNotificatinCommand}" IsRefreshing="{Binding IsBusy}" >
+    <!-- Content of the Notification Page -->
+    <StackLayout >
+        <!-- Page Title
+        <Label Text="Notifications"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,20,0,20"/> -->
+            <Label x:Name="NotificationPresent" Text="No available notifications" TextColor="#4A4B4D" Margin="140,350,0,0" FontAttributes="Bold" IsVisible="False" FontSize="15"/>
+            <!-- Notification List -->
+            <ListView x:Name="NotClicked" ItemsSource="{Binding Notificationlist}" ItemTapped="notificationListView_ItemTapped" HasUnevenRows="True" SeparatorVisibility="Default" >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:NotificationModel">
+                    <ViewCell x:Name="ItemColor">
+                            <StackLayout Padding="20,10">
+                                <Frame HasShadow="True" BackgroundColor="White" BorderColor="#FC6011" CornerRadius="20" >
+                                    <Label x:Name="NotifLabel"  Text="{Binding NotificationDetails}" FontAttributes="Bold" TextColor="#FC6011"></Label>
+                                   
+                                </Frame>
+                            </StackLayout>
+                        </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    </RefreshView>
+</ContentPage>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:template="clr-namespace:App2.Template"
+              xmlns:models="clr-namespace:App2.Models"
+             xmlns:local="clr-namespace:App2.ViewModels"
+             xmlns:fontawesome="clr-namespace:App1.Utility"
+             BackgroundColor="White"
+             x:Class="App2.Views.BookBagPage">
+
+    <RefreshView x:Name="RefreshView" x:DataType="local:BagViewModel" Command ="{Binding LoadBookCommand}" IsRefreshing="{Binding IsBusy}">
+        <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto" Padding="20">
+            <!--<Label Text="Check your Book Bag" Grid.Row="0" FontAttributes="Bold" TextColor="#4A4B4D" FontSize="20"/>-->
+            <!--<template:CheckoutTemplate CheckOutStep="Bag" Grid.Row="1"></template:CheckoutTemplate>-->
+            <Grid BackgroundColor="#FFC1A1" Grid.Row="2" ColumnSpacing="30" HeightRequest="50" Margin="-20,10" Padding="10" ColumnDefinitions="Auto,Auto,*">
+                <Label Text="Your Book Bag" TextColor="#4A4B4D" Grid.Column="0" VerticalOptions="Center" FontAttributes="Bold"></Label>
+                <Frame CornerRadius="10"  Margin="290,0,-160,0" BorderColor="#FC6011" BackgroundColor="#FC6011" WidthRequest="60">
+                    <Label x:Name="NumBooks" Margin="10,-5,-15,-10" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" ></Label>
+                </Frame>
+                <!--<Label Text="Add More" Grid.Column="2"  VerticalOptions="Center" HorizontalOptions="EndAndExpand" FontAttributes="Bold">
+
+                </Label>-->
+            </Grid>
+
+            <Label x:Name="BookInBag" Text="No books in the Bag" TextColor="#4A4B4D" IsVisible="false" FontSize="15" FontAttributes="Bold" Grid.Row="3" Margin="110,250,0,0"/>
+            <!--<RefreshView x:DataType="local:BagViewModel" Command ="{Binding LoadBookCommand}" IsRefreshing="{Binding IsBusy}">-->
+            <ListView ItemsSource ="{Binding Booklist}" x:Name="listview"   Grid.Row="3" Margin="-20,0" ItemTapped="listview_ItemTapped"  HasUnevenRows="True" SeparatorVisibility="Default" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout x:DataType="models:BookBagModel" Padding="0,5">
+                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                                    <Frame CornerRadius="0" Padding="0" Margin="5,0,0,0" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" BorderColor="white">
+                                        <Image Source="{Binding BookImage}" Aspect="Fill" Grid.Column="0" HeightRequest="140" WidthRequest="110" Grid.Row="0" Grid.RowSpan="4"></Image>
+                                    </Frame>
+                                    <Label Text="{Binding BookTitle}" TextColor="#4A4B4D" FontSize="18" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                    <Label Text="{Binding BookDescription}" TextColor="#4A4B4D" FontSize="13" FontAttributes="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" />
+                                    <Label Text="{Binding BookAuthor}" TextColor="#4A4B4D" FontSize="13" FontAttributes="Bold" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"  />
+                                    <!--<StackLayout Orientation="Horizontal" Spacing="2" Grid.Row="2" Grid.Column="2" Margin="-60,10,0,0" >
+                                        <Label Text="Qty:" TextColor="#4A4B4D" FontSize="13" FontAttributes="Bold" />
+                                        <Label Text="{Binding Quantity}" TextColor="#4A4B4D" FontSize="13" FontAttributes="Bold"/>
+                                    </StackLayout>-->
+                                    <StackLayout Orientation="Horizontal" Spacing="10" Grid.Row="3" Grid.Column="2" Margin="-90,10,0,0">
+                                        <Label Text="{x:Static fontawesome:Solid.Trash}" TextColor="#FC6011" FontSize="18"></Label>
+                                        <Label Text="Remove" FontSize="15"  TextColor="#FC6011" FontAttributes="Bold">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer x:DataType="local:BagViewModel" Command="{Binding RemoveCommand}"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <!-- </RefreshView> -->
+            <Button Text="Checkout Books" Clicked="Borrow_Clicked"  CornerRadius="30" BackgroundColor="#FC6011" Grid.Row="5" ></Button>
+        </Grid>
+    </RefreshView>
+    
+</ContentPage>

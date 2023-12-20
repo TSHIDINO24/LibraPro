@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="white"
+             x:Class="App2.Views.ViewBookPage">
+
+    <Grid  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,Auto">
+        <Label x:Name="BookTitle" Grid.Row="1" Margin="10,0,0,0" TextColor="#4A4B4D" FontAttributes="Bold" FontSize="20"/>
+        <Image x:Name="BookImage" Grid.Row="2" HeightRequest="330" HorizontalOptions="FillAndExpand" WidthRequest="400" Margin="0,30,0,0" VerticalOptions="Center"/>
+        <Label x:Name="BookDescription" Margin="10,10,10,0" TextColor="#4A4B4D" FontAttributes="Bold" FontSize="15" Grid.Row="3"/>
+
+        <StackLayout Grid.Row="4" Margin="10,10,0,0">
+            <Label Text="Author:" Grid.Row ="5"  FontAttributes="Bold" FontSize="17" TextColor="#4A4B4D"/>
+            <Label x:Name="BookAuthor" Margin="60,-29,0,0" FontAttributes="Bold" FontSize="17" TextColor="#4A4B4D"/>
+        </StackLayout>
+
+        <!--<Label Text="Author Name:" Grid.Row="4" FontAttributes="Bold" FontSize="17" TextColor="#4A4B4D"  Margin="10,10,0,0"/>-->
+        <StackLayout Grid.Row="4">
+            <Label Text="Qty:" FontAttributes="Bold" FontSize="17" TextColor="#4A4B4D"  Margin="300,10,0,0" />
+            <Label x:Name="BookQuantity" FontAttributes="Bold" FontSize="17" TextColor="#4A4B4D"  Margin="333,-27,0,0" />
+        </StackLayout>
+
+        <StackLayout Grid.Row="5">
+            <Label Text="ISBN:" Grid.Row ="5" Margin="10,0,0,0" FontAttributes="Bold" FontSize="17" TextColor="#4A4B4D"/>
+            <Label x:Name="ISBN" Margin="55,-29,0,0" FontAttributes="Bold" FontSize="17" TextColor="#4A4B4D"/>
+        </StackLayout>
+        <StackLayout Grid.Row="5" Margin="0,25,0,0">
+            <Label Text="Category:" Grid.Row ="5" Margin="10,0,0,0" FontAttributes="Bold" FontSize="17" TextColor="#4A4B4D"/>
+            <Label x:Name="Category" Margin="90,-29,0,0" FontAttributes="Bold" FontSize="17" TextColor="#4A4B4D"/>
+        </StackLayout>
+        <StackLayout Grid.Row="6">
+            <Label x:Name="BookStatus" Grid.Row ="5" Margin="10,0,0,0" FontAttributes="Bold" FontSize="17" TextColor="#4A4B4D"/>
+            <!--<Label Text="Music" Margin="90,-29,0,0" FontAttributes="Bold" FontSize="17" TextColor="#4A4B4D"/>-->
+
+            <Button Grid.Row="7" Grid.Column="2" Text="Add to Bag" Clicked="AddToBag_Clicked" BackgroundColor="#FC6011" CornerRadius="30" WidthRequest="10" HeightRequest="47" Margin="10,20,220,90"></Button>
+           
+        </StackLayout>
+        <Button Grid.Row="6" Text="Reserve" x:Name="ReserveBtn" TextColor="#fc6011" BackgroundColor="white" Clicked="Reserve_Clicked" IsVisible="false" CornerRadius="30" BorderColor="#fc6011" BorderWidth="2" HeightRequest="47" Margin="200,45,20,90"></Button>
+
+
+
+    </Grid>
+
+
+
+</ContentPage>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Views.ContactPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+
+            <StackLayout Grid.Row="1" Orientation="Vertical" Padding="30,100,30,24" Spacing="10">
+                <Label TextColor="#4a4b4d"  Text="Contact Information" HorizontalOptions="Center" FontSize="Title"/>
+                <Label TextColor="#4A4B4D" Text="Address:" FontSize="Subtitle" Padding="0,0,0,0"/>
+                <Label TextColor="#4A4B4D"  Text="Soweto, Diesploot, 1803"/>
+                <Label TextColor="#4A4B4D"  Text="Johannesburg, South Africa"/>
+                <Label Text="Email:" FontSize="Subtitle"/>
+                <Label TextColor="#4A4B4D" Text="librapro@gmail.com"/>
+
+            </StackLayout>
+
+            <StackLayout Grid.Row="2" Orientation="Vertical"   Padding="30,-10,30,24" Spacing="20">
+                <Label Text="Operation Hours" TextColor="#4a4b4d" HorizontalOptions="Center" FontSize="Title" />
+                <Label TextColor="#4A4B4D"  Text="Monday - Friday" FontSize="Subtitle"/>
+                <Label TextColor="#4A4B4D" Text="9:00 AM - 6:00 PM"/>
+                <Label TextColor="#4A4B4D"  Text="Saturday - Sunday" FontSize="Subtitle"/>
+                <Label TextColor="#4A4B4D" Text="10:00 AM - 4:00 PM"/>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

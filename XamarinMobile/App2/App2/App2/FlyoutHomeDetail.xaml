@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.FlyoutHomeDetail"
+             xmlns:models="clr-namespace:App2.Models"
+              BackgroundColor="White"
+              xmlns:fontawesome="clr-namespace:App1.Utility"
+             xmlns:local="clr-namespace:App2.ViewModels"
+              xmlns:vm="clr-namespace:App2.ViewModels"
+             Title="Home">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="NumBag" IconImageSource="basketcart.png" Clicked="Bag_Clicked" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.BindingContext>
+        <vm:BookVewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+
+
+    <ContentPage.Content>
+
+        <RefreshView x:DataType="local:BookVewModel" Command="{Binding LoadAllBookCommand}" IsRefreshing="{Binding IsBusy}"  >
+            <Grid RowDefinitions="Auto, Auto,Auto,Auto,Auto,*" RowSpacing="30" Padding="30">
+
+                <Grid Grid.Row="1" ColumnDefinitions="*,Auto" >
+                    <Frame Padding="10" BackgroundColor="white" CornerRadius="29" BorderColor="#FC6011" Margin="0,-35,0,0">
+                        <SearchBar Placeholder="Search by Book Name" PlaceholderColor="#4A4B4D" TextChanged="SearchBar_TextChanged" ></SearchBar>
+                    </Frame>
+                    <Grid Grid.Column="1" HorizontalOptions="End">
+                        <ImageButton Source="Filter.png"  VerticalOptions="Center" HeightRequest="20" WidthRequest="20"/>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="2" ColumnDefinitions="*,Auto" ColumnSpacing="15">
+                    <Label Text="Featued Books" TextColor="#4A4B4D" FontSize="20" FontAttributes="Bold" VerticalOptions="Center"/>
+                    <Image Grid.Column="1" Source="dots.png" VerticalOptions="Center" HeightRequest="20" WidthRequest="20"/>
+                </Grid>
+                <!--<Label x:Name="BookNotFound" Grid.Row="2" Margin="90,90,20,0" IsVisible="false" TextColor="#4A4B4D" FontSize="15" FontAttributes="Bold"  Text="Book does not exist"/>-->
+                <!--First Row-->
+                <CollectionView Grid.Row="3" x:Name="BookList"  SelectionMode="Single" ItemsSource="{Binding BooklistByCat}"
+                             SelectionChanged="CollectionView_SelectionChanged" SelectedItem="">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Horizontal"   Span="2"  HorizontalItemSpacing="30"  />
+                    </CollectionView.ItemsLayout>
+                    <!--<CollectionView.EmptyView>
+                        <Label Text="No Book found." TextColor="#4A4B4D" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </CollectionView.EmptyView>-->
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:BookModel">
+                            <Grid RowDefinitions="*" HeightRequest="10" Padding="10">
+                                <Grid.Clip>
+                                    <PathGeometry Figures="M20 96.5596C20 92.4719 22.0807 88.6655 25.5215 86.4586L146.521 8.85176C154.508 3.72922 165 9.46434 165 18.9527V185C165 191.627 159.627 197 153 197H32C25.3726 197 20 191.627 20 185V96.5596Z"/>
+                                </Grid.Clip>
+                                
+                                <StackLayout  Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="10,0,0,10" Padding="20,0,0,-10">
+                                    <Frame Margin="-50,0,0,0" Padding="0">
+                                        <Image Source="{Binding BookImage}" HeightRequest="0" Aspect="Fill"  WidthRequest="115" ></Image>
+                                    </Frame>
+                                    <StackLayout VerticalOptions="Start">
+                                        <Label Text="{Binding BookTitle}" TextColor="#4A4B4D" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Text="{Binding BookAuthor}" TextColor="#4A4B4D" FontSize="12" FontAttributes="Bold" Opacity="0.5"/>
+                                        <Label Text="{Binding BookQuantity}" TextColor="#4A4B4D" FontSize="12"/>
+                                    </StackLayout>
+
+                                </StackLayout>
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+            </Grid>
+
+        </RefreshView>
+
+
+    </ContentPage.Content>
+    
+</ContentPage>

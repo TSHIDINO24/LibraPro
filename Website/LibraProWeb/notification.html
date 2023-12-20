@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <style>
+        /* styles.css */
+        /* Add CSS for notification-like styling */
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .message {
+            background-color: #ffffff;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s;
+            position: relative;
+        }
+
+        .message:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.02);
+        }
+
+        .message h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .message-info {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .message-content {
+            display: none;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .message-button-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 1px;
+        }
+
+        .message-button1 {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 0px 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 55px;
+            height: 30px;
+
+        }
+
+        .delete-button1 {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 70px;
+            height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-left">
+                <h1>LibraPro</h1>
+                <nav>
+                    <ul>
+                        <li><a href="Home.html" id="homeLink">Home</a></li>
+                        <li><a href="index1.html" id="shopLink">Books</a></li>
+                        <li><a href="team.html" id="teamLink">Team</a></li>
+                        <li><a href="About.html">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-right">
+                    <a href="borrow.html">
+                        <span><box-icon name='message-square' style="margin-right: 5px;"></box-icon></span>
+                    </a>
+                    <div class="profile-container">
+                        <img src="profile.JPG" alt="User Profile" class="profile-image">
+                        <div class="dropdown-content">
+                            <a href="#" class="dropdown-item">Edit Profile</a>
+                            <a href="borrow.html" class="dropdown-item">Borrowed Books</a>
+                            <a href="#" class="dropdown-item">Notifications</a>
+                            <a href="#" class="dropdown-item">Settings</a>
+                            <a href="index.html" class="dropdown-item" id="logout">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <h1 style="text-align: center;">Notifications</h3>
+        <div class="chat-container" id="chat-container">
+            <!-- Existing messages will be added here -->
+        </div>
+
+
+        <footer>
+            <div class="contact-info">
+                <h3>CONTACT INFORMATION</h3>
+                <p>Email: <a href="LibraPro@gmail.com">LibraPro@gmail.com</a></p>
+                <p>Phone: (+27) 68 741 9876</p>
+            </div>
+            <div class="social-media">
+                <h3>SOCIAL MEDIA</h3>
+                <ul>
+                    <li><a href="https://www.facebook.com/" target="_blank"><box-icon type='logo'
+                                name='facebook'></box-icon></a>
+                    </li>
+                    <li><a href="https://www.twitter.com/" target="_blank"><box-icon type='logo'
+                                name='twitter'></box-icon></a></li>
+                    <li><a href="https://www.instagram.com/" target="_blank"><box-icon type='logo'
+                                name='instagram'></box-icon></a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+        <script>
+
+            function getCookie(name) {
+                const value = "; " + document.cookie;
+                const parts = value.split("; " + name + "=");
+                if (parts.length === 2) return parts.pop().split(";").shift();
+            }
+
+            const authToken = getCookie("sessionToken");
+
+            const headers = new Headers({
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json'
+            });
+            // Function to populate the chat container with messages
+            
+            // Function to toggle message visibility
+            function toggleMessage(messageElement) {
+                const messageContent = messageElement.querySelector('.message-content');
+                const messageButton = messageElement.querySelector('.message-button');
+
+                if (messageContent.style.display === "none" || messageContent.style.display === "") {
+                    messageContent.style.display = "block";
+                    messageButton.textContent = "Close";
+                } else {
+                    messageContent.style.display = "none";
+                    messageButton.textContent = "View";
+                }
+            }
+
+
+
+            async function populateChat() {
+                try {
+                    const response = await fetch('https://localhost:44310/api/Notification/usernotification', {
+                        method: "GET",
+                        headers: headers
+                    });
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const data = await response.json();
+                    const chatContainer = document.getElementById('chat-container');
+
+                    data.forEach(messageData => {
+                        const message = document.createElement('div');
+                        message.classList.add('message');
+
+                        const sender = document.createElement('h3');
+                        sender.textContent = messageData.notificationTitle;
+
+                        const buttonContainer = document.createElement('div');
+                        buttonContainer.classList.add('message-button-container');
+
+                        const viewButton = document.createElement('button');
+                        viewButton.classList.add('message-button1');
+                        viewButton.textContent = 'View';
+                        viewButton.addEventListener('click', () => toggleMessage(message));
+
+                        const content = document.createElement('div');
+                        content.classList.add('message-content');
+                        content.style.display = 'none';
+
+                        const messageText = document.createElement('p');
+                        messageText.textContent = messageData.notificationDetails;
+
+                        const messageInfo = document.createElement('p');
+                        messageInfo.classList.add('message-info');
+                        messageInfo.textContent = `Sent on ${messageData.notificationDate}`;
+
+                        const deleteButton = document.createElement('button');
+                        deleteButton.classList.add('delete-button1');
+                        deleteButton.textContent = 'Delete';
+                        console.log(messageData.NotificationId);
+                        deleteButton.addEventListener('click', () => {
+                            removenotification(messageData.NotificationId);
+                        });
+
+                        content.appendChild(messageText);
+                        content.appendChild(messageInfo);
+                        content.appendChild(deleteButton);
+
+                        buttonContainer.appendChild(viewButton);
+
+                        message.appendChild(sender);
+                        message.appendChild(buttonContainer);
+                        message.appendChild(content);
+
+                        chatContainer.appendChild(message);
+                    });
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            }
+            //function to deactivate user(by changing the status)
+            function ReadChat(notificationId) {
+                console.log(userId);
+                fetch(`https://localhost:44310/api/User/updateuserstatus/${userId}`, {
+                    method: 'PUT',
+                    headers: headers
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        //Update the user's status in the UI
+                        const userStatusCell = document.querySelector(`#data_table1 tr[data-userId="${userId}"] td.user-status`);
+                        if (userStatusCell) {
+                            userStatusCell.textContent = 'Deactivated';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error updating user status:', error);
+                    });
+            }
+
+            function removenotification(notificationID) {
+                fetch(`https://localhost:44310/api/Notification/deleteNotification/${notificationID}`, {
+                    method: 'DELETE',
+                    headers: headers
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        data.respone;
+                    })
+                    .catch(error => {
+                        console.error('Error removing book:', error);
+                    });
+            }
+
+            window.addEventListener('load', populateChat);
+        </script>
+
+
+</body>
+
+</html>

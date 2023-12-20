@@ -1,0 +1,154 @@
+<html>
+
+<head>
+  <!-- Stylesheet -->
+  <link href="css/style.css" rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="header-left">
+        <h1>LibraPro</h1>
+        <nav>
+          <ul>
+            <li><a href="Home.html" id="homeLink">Home</a></li>
+            <li><a href="index1.html" id="shopLink">Books</a></li>
+            <li><a href="team.html" id="teamLink">Team</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="header-right">
+          <a href="Register.html" class="btn sign-up"><span><i class="fas fa-user-plus"></i></span>Sign Up</a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+  <section>
+    <div class="form-section">
+      <div class="form-details">
+        <form id="loginForm">
+          <div class="message-container">
+            <p id="message"></p>
+          </div>
+          <h2>Sign In</h2>
+          <div class="message" id="response"></div>
+          <div class="inputbox">
+            <ion-icon name="mail-outline"></ion-icon>
+            <input type="email" required id="Email">
+            <label for="">Email</label>
+          </div>
+          <div class="inputbox">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input type="password" required id="Pass">
+            <label for="">Password</label>
+          </div>
+          <div class="remember">
+            <label for=""><input type="checkbox">Remember me? </input></label>
+            <label type="text"><a href="#"> Forgot Password</a></label>
+          </div>
+          <button type="submit">Sign In</button>
+          <div class="register">
+            <p>Don't have an Account?<a href="Register.html"> Register</a></p>
+          </div>
+
+        </form>
+      </div>
+    </div>
+    <div class="popup" id="popup">
+      <p id="popupMessage"></p>
+      <button id="closeButton">Close</button>
+    </div>
+
+  </section>
+  <footer>
+    <div class="contact-info">
+      <h3>CONTACT INFORMATION</h3>
+      <p>Email: <a href="LibraPro@gmail.com">LibraPro@gmail.com</a></p>
+      <p>Phone: (+27) 68 741 9876</p>
+    </div>
+    <div class="social-media">
+      <h3>SOCIAL MEDIA</h3>
+      <ul>
+        <li><a href="https://www.facebook.com/" target="_blank"><box-icon type='logo' name='facebook'></box-icon></a>
+        </li>
+        <li><a href="https://www.twitter.com/" target="_blank"><box-icon type='logo' name='twitter'></box-icon></a></li>
+        <li><a href="https://www.instagram.com/" target="_blank"><box-icon type='logo' name='instagram'></box-icon></a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="js/script.js"></script>
+  <script src="js/TokenManager.js"></script>
+  <script>
+
+    function showPopup(message) {
+      const popup = document.getElementById('popup');
+      const popupMessage = document.getElementById('popupMessage');
+      popupMessage.textContent = message;
+      popup.style.display = 'block';
+
+      // Close the popup when the close button is clicked
+      document.getElementById('closeButton').addEventListener('click', function () {
+        popup.style.display = 'none';
+      });
+    }
+
+    $(document).ready(function () {
+      $('#loginForm').submit(function (event) {
+        event.preventDefault();
+
+        const loginUrl = 'https://localhost:44310/api/User/weblogin';
+        const userEmail = $('#Email').val();
+        const userPassword = $('#Pass').val();
+
+        const data = {
+          UserEmail: userEmail,
+          UserPassword: userPassword
+        };
+
+        $.ajax({
+          type: 'POST',
+          url: loginUrl,
+          data: JSON.stringify(data),
+          contentType: 'application/json',
+          success: function (response) {
+            showPopup('Login successful');
+            const backendResponse = {
+              message: response.message,
+              token: response.token,
+              redirectUrl: response.redirectUrl
+            };
+
+            // Save token to localStorage or cookie
+            const sessionToken = backendResponse.token;
+            const expirationDays = 7;
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + expirationDays);
+
+            document.cookie = `sessionToken=${sessionToken}; expires=${expirationDate.toUTCString()}; path=/`;
+            //localStorage.setItem("token", sessionToken);
+
+            // Redirect to the appropriate page
+            window.location.href = backendResponse.redirectUrl;
+          },
+          error: function (error) {
+            console.error('Login error:', error);
+            showPopup("Password or Username incorrect!");
+          }
+        });
+      });
+    });
+
+  </script>
+</body>
+
+</html>
